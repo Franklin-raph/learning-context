@@ -61,7 +61,12 @@ const Products = () => {
                     <h2 className='font-[500] mb-1'>{product.name}</h2>
                     <p className='text-[13px]'>{product.description}</p>
                     <p>${product.price.toFixed(2)}</p>
-                    <button onClick={() => addToCart(product)} className='bg-green-500 text-white py-[5px] w-full px-5 mt-3 rounded-[5px]'>Add to Cart</button>
+                    {
+                        product.stock === 0?
+                        <p className='text-red-500'>Out of stock</p>
+                        :
+                        <button onClick={() => addToCart(product)} className='bg-green-500 text-white py-[5px] w-full px-5 mt-3 rounded-[5px]'>Add to Cart</button>
+                    }
                 </div>
             </div>
             ))}
