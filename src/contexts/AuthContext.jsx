@@ -44,26 +44,31 @@ export const AuthProvider = ({ children }) => {
           }
     
           // Set user information on successful login
-          setLogInUser({ email: data.data.email, token: data.data.access_token });
+          setLogInUser({ email: data.data.email });
           setError(null);
     
           // Optionally, store the token in localStorage for persistence
           localStorage.setItem('userToken', data.data.access_token);
+          localStorage.setItem('userEmail', data.data.email);
           navigate('/dashboard')
         } catch (err) {
           setError(err.message);
           setLogInUser(null);
           setTimeout(() => {
             setError(null)
-        }, 5000)
-        return
+          }, 5000)
+          return
         }
       };
 
       const logout = () => {
-        setUser(null);
+        console.log("Log out user...");
+        
+        setLogInUser(null);
         setError(null);
         localStorage.removeItem('userToken');
+        localStorage.removeItem('userEmail');
+        navigate('/login')
       };
 
     return (
